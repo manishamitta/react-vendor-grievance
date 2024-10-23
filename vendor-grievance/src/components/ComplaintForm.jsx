@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import SelectedPoContext from '../context/Selectedpo/SelectedPoContext';
 
 function ComplaintForm(props) {
-    const { complaint, setComplaint, ecom } = props;
+    const { complaint, setComplaint, ecom ,heading} = props;
     const { pono, vendor, CompType, Description } = complaint;
 
     const onChange = (e) => {
@@ -14,7 +14,7 @@ function ComplaintForm(props) {
 
     return (
         <div className="form-container">
-            <h2 style={{ textAlign: 'start' }}>Raise Complaint</h2>
+            <h2 style={{ textAlign: 'start' , margin : "0px 5px 5px 0px"}}>{heading}</h2>
             <form className="complain-form">
                 <div className="disabled-input">
                     <div className="input">
@@ -39,8 +39,8 @@ function ComplaintForm(props) {
                         <option value="" disabled>-- Select Complaint Type --</option>
                         <option value="Delay in Payment">Delay in Payment</option>
                         <option value="Wrong Payment">Wrong Payment</option>
-                        <option value="GST Issue">GST Issue</option>
-                        <option value="TDS Issue">TDS Issue</option>
+                        <option value="GST issue">GST Issue</option>
+                        <option value="TDS issue">TDS Issue</option>
                         <option value="Others">Others</option>
                     </select>
                 </div>

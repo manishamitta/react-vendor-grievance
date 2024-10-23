@@ -8,16 +8,16 @@ import ComplaintContext from '../context/Complaint/ComplaintContext';
 function Complaint() {
 
 const compContext = useContext(ComplaintContext);
-const {complaint, setComplaint} = compContext;
+const {complaint, setComplaint , PoComp } = compContext;
 
   return (
     <>
       <div className="step2-container">
-        <ComplaintTable />
+        <ComplaintTable data={PoComp}/>
       </div>
       <div className="step2-container">
         {/* <p>Step 2</p> */}
-        <ComplaintForm complaint={complaint} setComplaint={setComplaint} ecom={true} />
+        <ComplaintForm complaint={complaint} setComplaint={setComplaint} ecom={true} heading="Raise Complaint" />
       </div >
       <div className="step2-container">
         <Attachment  complaint={complaint} setComplaint={setComplaint} ecom={true}/>

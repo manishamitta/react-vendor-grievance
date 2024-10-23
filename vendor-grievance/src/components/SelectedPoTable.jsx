@@ -19,7 +19,7 @@ function SelectedPoTable() {
                 dataKey="pono" // Use a unique identifier for rows
                 value={selectedRow ? [selectedRow] : []} // Use a unique identifier for rows
             >
-                <Column field='pono' header="PoNo" />
+                <Column field='pono' header="PO Number" />
                 <Column field='vendor' header="Vendor Id" />
                 <Column field='type' header="PO/Invoice" />
                 <Column field='amount' header="PO Amount" />

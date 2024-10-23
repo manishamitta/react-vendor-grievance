@@ -1,40 +1,14 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+  font-family: "Tinos", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h2
+{
+  font-weight: 700;
 }
 .form-wizard-container {
   padding: 20px;
@@ -50,7 +24,9 @@
   text-align: center;
 }
 
-.back-button, .next-button, .complete-button {
+.back-button,
+.next-button,
+.complete-button {
   background-color: #4CAF50;
   border: none;
   color: white;
@@ -71,18 +47,23 @@
 .complete-button {
   background-color: #008CBA;
 }
-.step2-container
-{
+
+.step2-container {
   max-width: 80vw;
-  margin: 20px auto;
+  margin: 40px auto;
   outline: none;
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 40px;
-  background-color: whitesmoke; /* Semi-transparent background */
+  background-color: whitesmoke;
+  /* Semi-transparent background */
   backdrop-filter: blur(40px);
   padding: 10px;
   box-shadow: 0 0 10px rgba(219, 7, 7, 0.2);
-} 
+  transition: transform 0.3s ease; /* Smooth transition effect */
+  transform-style: preserve-3d; /* Enable 3D transformation */
+}
+
+
 /*PO Details  */
 .poTableContainer {
   margin: 20px 20px 20px 20px;
@@ -90,8 +71,8 @@
   background-color: white;
   min-height: 70vh;
 }
-.input-wrapper
-{
+
+.input-wrapper {
   display: flex;
   align-items: center;
   width: 100%;
@@ -99,38 +80,41 @@
   background-color: transparent;
   height: 45px;
 }
-.input-wrapper input
-{
+
+.input-wrapper input {
   margin: auto 2px;
   width: 95%;
   padding-left: 10px;
   font-size: 16px;
   outline: none;
-  border:  2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 4px;
   height: 80%;
 }
-.search-icon
-{
+
+.search-icon {
   color: black;
   font-size: 36px;
- 
+
 }
+
 /*PO Details  */
 /* Complaints Form Section */
 .form-container {
   background-color: white;
-  
-  max-height: 55vh; /* Ensure height is constrained */
+
+  max-height: 55vh;
+  /* Ensure height is constrained */
   padding: 10px;
   margin: 20px auto;
   max-width: 80vw;
-  border: 2px solid rgba(0,0,0,0.2);
+  border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   display: flex;
   flex-direction: column;
-  overflow: auto; /* Allows scrolling if content exceeds height */
+  overflow: auto;
+  /* Allows scrolling if content exceeds height */
 }
 
 .disabled-input {
@@ -144,13 +128,15 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  width: 100%; /* Ensure inputs take full width of their parent */
+  width: 100%;
+  /* Ensure inputs take full width of their parent */
 }
 
 .input input {
-  padding: 10px 0;
+  padding: 10px;
   margin-top: 4px;
-  width: 60%; /* Ensure inputs don't overflow */
+  width: 60%;
+  /* Ensure inputs don't overflow */
   border-radius: 4px;
   outline: none;
   box-shadow: none;
@@ -159,42 +145,48 @@
 .input select {
   margin-top: 4px;
   padding: 10px 0;
- /* Ensure selects don't overflow */
+  /* Ensure selects don't overflow */
 }
 
 .input textarea {
   flex-grow: 1;
   /* width: calc(100% - 10px);
    */
-   width: 100%;
-   padding-left: 2px;
+  width: 100%;
+  padding-left: 2px;
   max-height: 10vh;
   margin-top: 4px;
-  
-  overflow: auto; /* Allow scrolling inside the textarea */
+
+  overflow: auto;
+  /* Allow scrolling inside the textarea */
 }
+
 .input select,
 .input textarea {
   margin-top: 4px;
   border-radius: 4px;
-  outline: none; /* Remove the outline when clicked */
-   /* Optional: Remove any borders */
-  box-shadow: none; /* Remove any shadows */
+  outline: none;
+  /* Remove the outline when clicked */
+  /* Optional: Remove any borders */
+  box-shadow: none;
+  /* Remove any shadows */
   background-color: transparent;
-  backdrop-filter: blur(40px); /* Optional: Ensure no background change */
+  backdrop-filter: blur(40px);
+  /* Optional: Ensure no background change */
 }
+
 /*  */
 
 
 /* Complaints Attachments section*/
 .attachment-container {
   background-color: white;
- 
+
   height: 40vh;
   padding: 10px;
   margin: 20px auto;
   max-width: 80vw;
-  border: 2px solid rgba(0,0,0,0.2);
+  border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   display: flex;
@@ -203,7 +195,7 @@
 }
 
 .heading-btn {
- 
+
   padding: 0px 10px;
   height: 20%;
   margin-bottom: 10px;
@@ -211,8 +203,10 @@
   justify-content: space-between;
   align-items: center;
   /* border: 2px solid rgba(255, 255, 255, 0.2); */
-  border: 2px solid rgba(0,0,0,0.2);
+  border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 20px;
+  border: none;
+  outline: none;
 }
 
 .attach-btn {
@@ -223,84 +217,108 @@
   font-size: 16px;
   border: 4px;
   margin-right: 10px;
-  background-color: rgba(17, 133, 154, 0.2);
+  
+  background-color: #094899;
   border-radius: 20px;
+}
+.attach-btn:hover
+{
+  background-color: rgba(17, 133, 154, 0.2);
+  cursor: pointer;
 }
 
 .attachment-list {
   flex-grow: 1;
- 
-  overflow-y: auto; /* Enable vertical scroll */
+
+  overflow-y: auto;
+  /* Enable vertical scroll */
   padding: 5px;
 }
 
 .attachment-item {
-  display: flex; /* Use flexbox for alignment */
-  justify-content: space-between; /* Space between icon/title and delete icon */
-  align-items: center; /* Align items vertically centered */
-  padding: 5px; /* Optional: Add padding for better spacing */
+  display: flex;
+  /* Use flexbox for alignment */
+  justify-content: space-between;
+  /* Space between icon/title and delete icon */
+  align-items: center;
+  /* Align items vertically centered */
+  padding: 5px;
+  /* Optional: Add padding for better spacing */
 }
 
 .list-icons {
-  display: flex; /* Use flexbox for horizontal alignment */
-  align-items: center; /* Align items vertically centered */
+  display: flex;
+  /* Use flexbox for horizontal alignment */
+  align-items: center;
+  /* Align items vertically centered */
 }
 
 .file-icon {
-  margin-right: 4px; /* Add a 2px gap between icon and file name */
+  margin-right: 4px;
+  /* Add a 2px gap between icon and file name */
 }
 
 .attachment-list a {
-  text-decoration: none; /* Remove underline */
-  color: black;         /* Set text color to black */
+  text-decoration: none;
+  /* Remove underline */
+  color: black;
+  /* Set text color to black */
 }
 
 .attachment-list a:hover {
-  text-decoration: underline; /* Optional: underline on hover for better UX */
-  color: darkgray;           /* Optional: change color on hover */
+  text-decoration: underline;
+  /* Optional: underline on hover for better UX */
+  color: darkgray;
+  /* Optional: change color on hover */
 }
+
 /* END OF ATTACHMENT */
 .ComplaintTable {
   background-color: white;
-  max-height: 50vh; /* Ensure height is constrained */
+  max-height: 50vh;
+  /* Ensure height is constrained */
   padding: 10px;
   max-width: 80vw;
-  border: 2px solid rgba(0,0,0,0.2);
+  border: 2px solid rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   /* display: flex;  */
   flex-direction: column;
   overflow: auto;
-  margin: 20px auto; /* Center the element horizontally */
+  margin: 20px auto;
+  /* Center the element horizontally */
 }
 
 .ComplaintTableContent {
-  width: 100%; /* Make the table content fit the container width */
+  width: 100%;
+  /* Make the table content fit the container width */
   /* border: 2px solid rgba(2, 2, 2, 0.2); */
 }
 
 .p-datatable {
-  width: 100%; /* Ensure the table spans the full container width */
+  width: 100%;
+  /* Ensure the table spans the full container width */
 }
 
-.p-datatable-tbody > tr > td {
-  padding: 8px; /* Optional padding for table cells */
+.p-datatable-tbody>tr>td {
+  padding: 8px;
+  /* Optional padding for table cells */
   border-bottom: 1px solid #ddd;
   text-align: left;
 }
 
-.p-datatable-thead > tr > th {
+.p-datatable-thead>tr>th {
   padding: 8px;
   background-color: #f4f4f4;
   text-align: center !important;
 
 }
+
 /* icons */
 
 /* Loader CSS */
 
-.loadingGif
-{
+.loadingGif {
   width: 100%;
   height: 100%;
   min-height: 80vh;
@@ -309,4 +327,12 @@
   justify-content: center;
 }
 
+/* Complaint details */
+.bck-btn {
+  max-width: 80vw;
+  padding: 10px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: end;
 
+}

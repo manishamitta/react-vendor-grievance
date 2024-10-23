@@ -12,7 +12,7 @@ function PoDetails() {
     const { selectedRow, setSelectedRow, poData, getPoData } = context;
 
     const compContext = useContext(ComplaintContext);
-    const { complaint, setComplaint } = compContext;
+    const { complaint, setComplaint, getCompalins } = compContext;
 
     const [filters, setFilters] = useState({
         global: { value: null, matchMode: FilterMatchMode.CONTAINS }
@@ -27,11 +27,13 @@ function PoDetails() {
         setSelectedRow(rowData); // Update selected row
         const id = rowData.vendor;
         const po = rowData.pono;
+
         setComplaint({
             ...complaint,
             vendor: id,
             pono: po
         });
+        getCompalins(po);
         console.log('Selected Row:', rowData); // Log the selected row details
     };
 
@@ -52,47 +54,47 @@ function PoDetails() {
     return (
         <div>
             <>
-            {poData ? (
+                {poData ? (
 
 
-                <div className='step2-container'>
-                    <div className="poTableContainer">
-                        <div className="input-wrapper">
-                            <input
-                                type="text"
-                                placeholder="Search..."
-                                onChange={(e) => setFilters({
-                                    ...filters,
-                                    global: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS }
-                                })}
-                            />
-                            <IoIosSearch className="search-icon" />
-                        </div>
-                        <div className='poTable'>
-                            <DataTable
-                                className='TableContent p-datatable'
-                                stripedRows
-                                value={poData}
-                                sortMode='multiple'
-                                filters={filters}
-                                paginator
-                                rows={5}
-                                rowsPerPageOptions={[5, 10, 15]}
-                                paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
-                                currentPageReportTemplate="{first} to {last} of {totalRecords}"
-                                dataKey="pono" // Use a unique identifier for rows
-                            >
-                                <Column body={radioButtonTemplate} header="Select" />
-                                <Column field='vendor' header="Vendor Id" sortable />
-                                <Column field='pono' header="PO Number" sortable />
-                                <Column field='type' header="Po/Invoice" sortable />
-                                <Column field='amount' header="PO Amount" sortable />
-                            </DataTable>
+                    <div className='step2-container'>
+                        <div className="poTableContainer">
+                            <div className="input-wrapper">
+                                <input
+                                    type="text"
+                                    placeholder="Search..."
+                                    onChange={(e) => setFilters({
+                                        ...filters,
+                                        global: { value: e.target.value, matchMode: FilterMatchMode.CONTAINS }
+                                    })}
+                                />
+                                <IoIosSearch className="search-icon" />
+                            </div>
+                            <div className='poTable'>
+                                <DataTable
+                                    className='TableContent p-datatable'
+                                    stripedRows
+                                    value={poData}
+                                    sortMode='multiple'
+                                    filters={filters}
+                                    paginator
+                                    rows={10}
+                                    rowsPerPageOptions={[10, 15, 20]}
+                                    paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+                                    currentPageReportTemplate="{first} to {last} of {totalRecords}"
+                                    dataKey="pono" // Use a unique identifier for rows
+                                >
+                                    <Column body={radioButtonTemplate} header="Select" />
+                                    <Column field='vendor' header="Vendor Id" sortable />
+                                    <Column field='pono' header="PO Number" sortable />
+                                    <Column field='type' header="Po/Invoice" sortable />
+                                    <Column field='amount' header="PO Amount" sortable />
+                                </DataTable>
+                            </div>
                         </div>
                     </div>
-                </div>
                 ) :
-                <Loading />}
+                    <Loading />}
             </>
         </div>
     )

@@ -13,7 +13,7 @@ function Preview() {
       <SelectedPoTable/>
     </div>
     <div className='step2-container'>
-     <ComplaintForm complaint={complaint} setComplaint={setComplaint} ecom={false} />
+     <ComplaintForm complaint={complaint} setComplaint={setComplaint} ecom={false} heading="Raise Complaint" />
     </div>
     <div className='step2-container'>
       <Attachment complaint={complaint} setComplaint={setComplaint} ecom={false}/>
