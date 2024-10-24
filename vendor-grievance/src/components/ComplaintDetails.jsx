@@ -1,14 +1,11 @@
 import React, { useContext } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom';
 import ComplaintForm from './ComplaintForm';
 import Attachment from './Attachment'
 import ComplaintContext from '../context/Complaint/ComplaintContext'
-function ComplaintDetails() {
+function ComplaintDetails({onClose}) {
 
   const compContext = useContext(ComplaintContext);
   const { revComp, setrevComp } = compContext;
-  const navigate = useNavigate();
-  const location = useLocation();
   const backButtonStyle = {
     marginTop: '10px',
     padding: '10px 20px',
@@ -21,22 +18,19 @@ function ComplaintDetails() {
   };
 
 
-  const handleBackClick = () => {
-    navigate(`/`);
-  };
 
 
   return (
     <>
       
         <div className='step2-container'>
-          <ComplaintForm complaint={revComp} setComplaint={setrevComp} ecom={false} heading="Complaint" />
+          <ComplaintForm complaint={revComp} setComplaint={setrevComp} ecom={false} heading= {`Complaint No :- ${revComp.id}`}/>
         </div>
         <div className='step2-container'>
           <Attachment complaint={revComp} setComplaint={setrevComp} ecom={false} />
         </div>
         <div className="bck-btn">
-          <button onClick={handleBackClick} style={backButtonStyle}>
+          <button onClick={onClose} style={backButtonStyle}>
             Back
           </button>
         </div>

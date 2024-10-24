@@ -11,13 +11,8 @@ function App() {
   return (
     <SelectedPoState>
       <ComplaintState>
-        <Router>
-          <Routes>
-            <Route path="/" element={<FirstPage />} />
-            <Route path="/complaint/:complaintNo" element={<ComplaintDetails />} />
-          </Routes>
-        </Router>
-        </ComplaintState >
+        <FirstPage />
+      </ComplaintState >
     </SelectedPoState>
   );
 }

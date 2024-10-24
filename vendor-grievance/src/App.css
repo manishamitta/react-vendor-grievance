@@ -58,7 +58,8 @@ h2
   /* Semi-transparent background */
   backdrop-filter: blur(40px);
   padding: 10px;
-  box-shadow: 0 0 10px rgba(219, 7, 7, 0.2);
+  box-shadow: 0 0 10px rgba(39, 7, 219, 0.532);
+  /* box-shadow: 0 0 10px rgba(219, 7, 7, 0.2); */
   transition: transform 0.3s ease; /* Smooth transition effect */
   transform-style: preserve-3d; /* Enable 3D transformation */
 }
@@ -335,4 +336,42 @@ h2
   display: flex;
   justify-content: end;
 
+}
+
+/* Modal CSS */
+.modal-overlay {
+  position: fixed;
+  min-width: 90%;
+  margin: auto;
+  height: 100%;
+  overflow-y: scroll;
+  background-color: #094899;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+ 
+  min-width:100%;
+  margin: auto;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
 }

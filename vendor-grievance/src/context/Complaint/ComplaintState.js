@@ -10,9 +10,17 @@ const ComplaintState = (props) => {
         Description: '',
         Attachment: []
     };
+    const comp2 = {
+        id : '',
+        vendor: '',
+        pono: '',
+        CompType: '',
+        Description: '',
+        Attachment: []
+    };
 
     const [complaint, setComplaint] = useState(comp1);
-    const [revComp, setrevComp] = useState(comp1);
+    const [revComp, setrevComp] = useState(comp2);
     const [temp, setTemp] = useState(null);
     const [PoComp, setPoComp] = useState(null);
     const getCompalins = async (pono) => {
@@ -57,6 +65,7 @@ const ComplaintState = (props) => {
 
         if (foundComplaint) {
             setrevComp({
+                id : foundComplaint.complainno,
                 vendor: foundComplaint.cvencode, // vendor id
                 pono: foundComplaint.cpono,      // PO number
                 CompType: foundComplaint.ccomplain_about, // Complaint type
