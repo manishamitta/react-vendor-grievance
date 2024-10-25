@@ -18,7 +18,7 @@ function ComplaintForm(props) {
             <form className="complain-form">
                 <div className="disabled-input">
                     <div className="input">
-                        <label htmlFor="vend_id">Vendor Id:</label>
+                        <label htmlFor="vend_id">Vendor Code:</label>
                         <input type="text" id='vend_id' name='vendor' value={vendor || ''} disabled />
                     </div>
                     <div className="input">

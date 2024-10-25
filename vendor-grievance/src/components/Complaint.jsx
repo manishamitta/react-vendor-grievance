@@ -50,18 +50,20 @@ function Complaint() {
          <ComplaintDetails onClose={closeModal}/>
         </Modal>
       ) : (
+        <div className='parent'>
         <>
           {/* Render other components when modal is closed */}
           <div className="step2-container">
             <ComplaintTable data={PoComp}  openModal={openModal}/>
           </div>
           <div className="step2-container">
-            <ComplaintForm complaint={complaint} setComplaint={setComplaint} ecom={true} heading="Raise Complaint" />
+            <ComplaintForm complaint={complaint} setComplaint={setComplaint} ecom={true} heading=" Complaint Details" />
           </div>
           <div className="step2-container">
             <Attachment complaint={complaint} setComplaint={setComplaint} ecom={true} />
           </div>
         </>
+        </div>
       )}
     </div>
   </>

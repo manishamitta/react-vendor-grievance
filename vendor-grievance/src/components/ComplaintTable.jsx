@@ -28,7 +28,7 @@ function ComplaintTable({ data, openModal }) {
     return (
         <>
             <div className="ComplaintTable">
-                <h2 style={{ textAlign: 'start', margin: "0px 5px 5px 0px" }}>Related Complaints</h2>
+                <h2 style={{ textAlign: 'start', margin: "0px 5px 5px 0px" }}>Complaint Table</h2>
                 <DataTable
                     className='ComplaintTableContent'
                     value={data}
@@ -41,8 +41,10 @@ function ComplaintTable({ data, openModal }) {
                     onRowClick={(event) => onRowClick(event.data)}
                 >
                     <Column field='complainno' header="Complaint No" sortable />
-                    <Column field='cpono' header="PO Number" sortable />
-                    <Column field='ccomplain_about' header="Complaint Type" sortable body={complaintNoTemplate} />
+                    <Column field='cpono' header="PO/Invoice Number" sortable />
+                    {/* <Column field='cvencode' header="Vendor Code" sortable /> */}
+                    <Column field='cstatus' header="Status" sortable />
+                    <Column field='ccomplain_about' header="Type" sortable body={complaintNoTemplate} />
                 </DataTable>
             </div>
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import Loader from './images/Loading.gif'
-function Loading() {
+function Loading({height,width}) {
   return (
     <div className='loadingGif'>
-      <img src= {Loader}  style={{heigth : "50px" , width:"50px"}}alt="" className="loader"  />
+      <img src= {Loader}  alt="" className="loader"  />
     </div>
   )
 }

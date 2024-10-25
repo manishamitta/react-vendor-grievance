@@ -7,6 +7,7 @@ import pdfIcon from './images/pdf.png'; // Replace with the correct path
 import imageIcon from './images/image.png'; // Replace with the correct path
 import textIcon from './images/text.png'; // Replace with the correct path
 import zipIcon from './images/zip.png'; // Replace with the correct path
+import attach from './images/attachment.png';
 // import ComplaintContext from '../context/Complaint/ComplaintContext';
 function Attachment(props) {
     // const [attachments, setAttachments] = useState([]);
@@ -57,7 +58,7 @@ function Attachment(props) {
             case 'rar':
                 return <img src={zipIcon} alt="Zip File" width="16" height="16" />;
             default:
-                return <img src={textIcon} alt="File" width="16" height="16" />; // Default icon for unknown types
+                return <img src={attach} alt="File" width="16" height="16" />; // Default icon for unknown types
         }
     };
 

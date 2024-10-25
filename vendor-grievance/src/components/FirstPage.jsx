@@ -33,7 +33,7 @@ function FirstPage() {
 
     const errorMessages = () => {
         // you can add alert or console.log or any thing you want
-        alert("Please Select The Row");
+        // alert("Please Select The Row");
       };
 
     const tabChanged = ({ prevIndex, nextIndex }) => {

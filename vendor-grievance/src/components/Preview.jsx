@@ -8,6 +8,7 @@ function Preview() {
   const compContext = useContext(ComplaintContext);
   const { complaint, setComplaint } = compContext;
   return (
+    <div className='parent'>
     <>
      <div className='step2-container'>
       <SelectedPoTable/>
@@ -19,6 +20,7 @@ function Preview() {
       <Attachment complaint={complaint} setComplaint={setComplaint} ecom={false}/>
     </div>
     </>
+    </div>
   )
 }
 

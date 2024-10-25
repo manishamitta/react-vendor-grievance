@@ -52,7 +52,7 @@ function PoDetails() {
         );
     };
     return (
-        <div>
+        <div className='parent'>
             <>
                 {poData ? (
 
@@ -85,16 +85,16 @@ function PoDetails() {
                                     dataKey="pono" // Use a unique identifier for rows
                                 >
                                     <Column body={radioButtonTemplate} header="Select" />
-                                    <Column field='vendor' header="Vendor Id" sortable />
-                                    <Column field='pono' header="PO Number" sortable />
-                                    <Column field='type' header="Po/Invoice" sortable />
-                                    <Column field='amount' header="PO Amount" sortable />
+                                    <Column field='vendor' header="Vendor Code" sortable />
+                                    <Column field='pono' header="PO/Invoice Number" sortable />
+                                    <Column field='type' header="Type" sortable />
+                                    <Column field='amount' header="Amount" sortable />
                                 </DataTable>
                             </div>
                         </div>
                     </div>
                 ) :
-                    <Loading />}
+                    <Loading/>}
             </>
         </div>
     )

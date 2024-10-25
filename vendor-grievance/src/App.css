@@ -55,13 +55,18 @@ h2
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 40px;
   background-color: whitesmoke;
-  /* Semi-transparent background */
   backdrop-filter: blur(40px);
   padding: 10px;
   box-shadow: 0 0 10px rgba(39, 7, 219, 0.532);
-  /* box-shadow: 0 0 10px rgba(219, 7, 7, 0.2); */
-  transition: transform 0.3s ease; /* Smooth transition effect */
-  transform-style: preserve-3d; /* Enable 3D transformation */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+/* .parent{
+  perspective: 1000px; 
+} */
+.step2-container:hover {
+  transform: translateZ(20px); 
+  box-shadow: 0 0 20px rgba(39, 7, 219, 0.532); 
 }
 
 
@@ -222,7 +227,7 @@ h2
   background-color: #094899;
   border-radius: 20px;
 }
-.attach-btn:hover
+.attach-btn:hover,.cmt-btn button:hover
 {
   background-color: rgba(17, 133, 154, 0.2);
   cursor: pointer;
@@ -374,4 +379,36 @@ h2
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
+}
+.comments-container
+{
+  text-align: start;
+  background-color: white;
+  min-height: 40vh;
+  padding: 10px;
+  margin: 20px auto;
+  max-width: 80vw;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+.cmtheadingbtn
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cmt-btn button
+{
+  padding: 10px;
+  margin: 5px;
+  background-color: #094899;
+  border-radius: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border: 4px;
 }
