@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Loading from './Loading'; // Import your Loading component
+import Loading from './Loading';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import your Loading component
+import { FaUser } from 'react-icons/fa';
 
 function Comments({ commentsData }) {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -78,9 +81,17 @@ function Comments({ commentsData }) {
                             // Display other comments if more than one exists
                             otherComments.map((comment, index) => (
                                 <div key={index} className="comment-item1">
+
+                                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                                        <FontAwesomeIcon icon={faUser} size='2x' style={{ width: '40px', borderRadius: '50%', marginRight: '10px' }}/> {/* Person icon */}
+                                        
+                                        <div>
+                                        <strong>{comment.createdBy}</strong><br />
+                                        <small>{new Date(comment.createdAt).toLocaleString()}</small>
+                                    </div>
+                                    </div>
                                     <p><strong>Comment:</strong> {comment.comments}</p>
-                                    <p><strong>Created At:</strong> {new Date(comment.createdAt).toLocaleString()}</p>
-                                    <p><strong>Created By:</strong> {comment.createdBy}</p>
+
                                     <hr />
                                 </div>
                             ))

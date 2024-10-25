@@ -24,7 +24,7 @@ h2
   text-align: center;
 }
 
-.back-button,
+/* .back-button,
 .next-button,
 .complete-button {
   background-color: #4CAF50;
@@ -46,7 +46,7 @@ h2
 
 .complete-button {
   background-color: #008CBA;
-}
+} */
 
 .step2-container {
   max-width: 80vw;

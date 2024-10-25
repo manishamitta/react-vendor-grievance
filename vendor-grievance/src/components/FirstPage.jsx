@@ -10,10 +10,10 @@ import ComplaintContext from '../context/Complaint/ComplaintContext';
 
 function FirstPage() {
 
- 
+
     const [currentStep, setCurrentStep] = useState(0);
     const pocontext = useContext(SelectedPoContext);
-    const { selectedRow , poData} = pocontext;
+    const { selectedRow, poData } = pocontext;
 
     const compContext = useContext(ComplaintContext);
     const { complaint } = compContext;
@@ -34,7 +34,7 @@ function FirstPage() {
     const errorMessages = () => {
         // you can add alert or console.log or any thing you want
         // alert("Please Select The Row");
-      };
+    };
 
     const tabChanged = ({ prevIndex, nextIndex }) => {
         console.log("prevIndex", prevIndex);
@@ -50,13 +50,28 @@ function FirstPage() {
                 onTabChange={tabChanged}
                 initialIndex={currentStep}
                 color="#094899"
+                backButtonTemplate={(handlePrevious) => (
+                    <button className="back-button" onClick={handlePrevious}>
+                        Back
+                    </button>
+                )}
+                nextButtonTemplate={(handleNext) => (
+                    <button className="next-button" onClick={handleNext}>
+                        Next
+                    </button>
+                )}
+                finishButtonTemplate={(handleComplete) => (
+                    <button className="finish-button" onClick={handleComplete}>
+                        Submit
+                    </button>
+                )}
             >
                 <FormWizard.TabContent
                     title="PO Details"
                     icon={<FaUser />}
                     showErrorOnTab={!checkValidateTab()} // Show error if PO Details are not valid
                     showErrorOnTabColor="red"
-                    
+
                 >
                     <PoDetails />
                 </FormWizard.TabContent>
@@ -108,6 +123,93 @@ function FirstPage() {
                 .form-wizard .tab:hover.error {
                     color: red !important;
                 }
+                      .next-button {
+          background-color: blue;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          cursor: pointer;
+          margin-right: 10px;
+          margin-left: 10px;
+          border-radius: 50px;
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+          transition: background-color 0.3s ease;
+          float: right;
+          }
+          
+          .next-button:hover {
+          background-color: navy;
+          }
+          
+          .next-button:focus {
+          outline: none;
+          }
+          
+          .next-button:active {
+          transform: translateY(2px);
+          }
+        .back-button {
+          background-color: blue;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          cursor: pointer;
+          margin-right: 10px;
+          margin-left: 10px;
+          border-radius: 50px;
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+          transition: background-color 0.3s ease;
+          float: left;
+          }
+          
+          .back-button:hover {
+          background-color: navy;
+          }
+          
+          .back-button:focus {
+          outline: none;
+          }
+          
+          .back-button:active {
+          transform: translateY(2px);
+          }
+
+        .finish-button{
+          background-color: green;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          cursor: pointer;
+          margin-right: 10px;
+          margin-left: 10px;
+          border-radius: 50px;
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+          transition: background-color 0.3s ease;
+          float: right;
+        }
+        .finish-button:hover {
+          background-color: darkgreen;
+          }
+        
+        .finish-button:focus {
+          outline: none;
+         }
+          
+        .finish-button:active {
+          transform: translateY(2px);
+         }
             `}</style>
         </div>
     );
