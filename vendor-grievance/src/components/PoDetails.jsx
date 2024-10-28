@@ -51,6 +51,11 @@ function PoDetails() {
             />
         );
     };
+    const rowClassName = () => {
+        return {
+            'highlight-row' : true,
+        }
+    }
     return (
         <div className='parent'>
             <>
@@ -83,6 +88,7 @@ function PoDetails() {
                                     paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
                                     currentPageReportTemplate="{first} to {last} of {totalRecords}"
                                     dataKey="pono" // Use a unique identifier for rows
+                                    rowClassName={rowClassName}
                                 >
                                     <Column body={radioButtonTemplate} header="Select" />
                                     <Column field='vendor' header="Vendor Code" sortable />
@@ -94,7 +100,7 @@ function PoDetails() {
                         </div>
                     </div>
                 ) :
-                    <Loading/>}
+                    <Loading />}
             </>
         </div>
     )

@@ -83,11 +83,11 @@ function Comments({ commentsData }) {
                                 <div key={index} className="comment-item1">
 
                                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                                        <FontAwesomeIcon icon={faUser} size='2x' style={{ width: '40px', borderRadius: '50%', marginRight: '10px' }}/> {/* Person icon */}
+                                        <FontAwesomeIcon icon={faUser} size='2x' style={{ width: '40px', borderRadius: '50%', marginRight: '10px',color: "#234ab5" }}/> {/* Person icon */}
                                         
                                         <div>
                                         <strong>{comment.createdBy}</strong><br />
-                                        <small>{new Date(comment.createdAt).toLocaleString()}</small>
+                                        <small style={{color : "514f4f"}}>{new Date(comment.createdAt).toLocaleString()}</small>
                                     </div>
                                     </div>
                                     <p><strong>Comment:</strong> {comment.comments}</p>

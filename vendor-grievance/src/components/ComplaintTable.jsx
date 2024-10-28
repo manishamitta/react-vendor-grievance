@@ -25,6 +25,11 @@ function ComplaintTable({ data, openModal }) {
             <span style={{ marginLeft: 'auto', color: 'gray' }}>&gt;</span> {/* Right arrow symbol */}
         </div>
     );
+    const rowClassName = () => {
+        return {
+            'highlight-row': true, // Add a custom class to all rows
+        };
+    };
     return (
         <>
             <div className="ComplaintTable">
@@ -39,6 +44,7 @@ function ComplaintTable({ data, openModal }) {
                     rowsPerPageOptions={[10, 15, 20]}
                     dataKey="complainno" // Use a unique identifier for rows
                     onRowClick={(event) => onRowClick(event.data)}
+                    rowClassName={rowClassName}
                 >
                     <Column field='complainno' header="Complaint No" sortable />
                     <Column field='cpono' header="PO/Invoice Number" sortable />

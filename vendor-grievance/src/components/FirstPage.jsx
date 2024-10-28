@@ -40,6 +40,7 @@ function FirstPage() {
         console.log("prevIndex", prevIndex);
         console.log("nextIndex", nextIndex);
         setCurrentStep(nextIndex);
+        window.scrollTo(0, 0);
     };
 
     return (
