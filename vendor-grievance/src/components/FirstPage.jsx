@@ -16,11 +16,14 @@ function FirstPage() {
     const { selectedRow, poData } = pocontext;
 
     const compContext = useContext(ComplaintContext);
-    const { complaint } = compContext;
+    const { complaint , handleCompSumbit} = compContext;
 
     const handleComplete = () => {
-        alert("Form completed!"); // Show alert message
-        window.location.reload(); // Reload the page
+        // alert("Form completed!"); // Show alert message
+       console.log(complaint);
+       return;
+        // handleCompSumbit(complaint);
+        // window.location.reload(); // Reload the page
     };
 
     const checkValidateTab = () => {
@@ -37,13 +40,14 @@ function FirstPage() {
     };
 
     const tabChanged = ({ prevIndex, nextIndex }) => {
-        console.log("prevIndex", prevIndex);
-        console.log("nextIndex", nextIndex);
+        // console.log("prevIndex", prevIndex);
+        // console.log("nextIndex", nextIndex);
         setCurrentStep(nextIndex);
-        window.scrollTo(0, 0);
+        // window.scrollTo(0, 0);
     };
 
     return (
+       <>
         <div className="form-wizard-container">
             <FormWizard
                 stepSize="sm"
@@ -213,6 +217,7 @@ function FirstPage() {
          }
             `}</style>
         </div>
+       </>
     );
 }
 

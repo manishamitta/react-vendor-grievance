@@ -34,7 +34,7 @@ function PoDetails() {
             pono: po
         });
         getCompalins(po);
-        console.log('Selected Row:', rowData); // Log the selected row details
+        // Log the selected row details
     };
 
     const radioButtonTemplate = (rowData) => {

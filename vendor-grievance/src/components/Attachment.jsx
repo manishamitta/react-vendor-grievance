@@ -13,26 +13,47 @@ function Attachment(props) {
     // const [attachments, setAttachments] = useState([]);
     const fileInputRef = useRef(null);
     // const compContext = useContext(ComplaintContext);
-    const {complaint, setComplaint, ecom } = props;
+    const { complaint, setComplaint, ecom } = props;
     // Handle file selection
-    const handleFileChange = (event) => {
+    // Helper to read file content as Base64
+    const readFileContent = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);  // Resolve the file content as base64
+            reader.onerror = reject;
+            reader.readAsDataURL(file);  // Read file as base64 URL
+        });
+    };
+
+    // Handle file selection
+    const handleFileChange = async (event) => {
         const selectedFiles = Array.from(event.target.files);
-        const updatedAttachments = [...complaint.Attachment, ...selectedFiles];
-        
+
+        // Process each file and read its content
+        const filesWithContent = await Promise.all(
+            selectedFiles.map(async (file) => ({
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                content: await readFileContent(file)  // Get file content in base64
+            }))
+        );
+
         // Update the complaint object with the new attachments
         setComplaint({
             ...complaint,
-            Attachment: updatedAttachments
+            Attachment: [...complaint.Attachment, ...filesWithContent]
         });
 
         fileInputRef.current.value = '';  // Reset the input after selection
     };
 
+
     // Handle file deletion
     const handleDelete = (fileName) => {
         const updatedAttachments = complaint.Attachment.filter(file => file.name !== fileName);
-          // Update the complaint object after deletion
-          setComplaint({
+        // Update the complaint object after deletion
+        setComplaint({
             ...complaint,
             Attachment: updatedAttachments
         });
@@ -66,7 +87,7 @@ function Attachment(props) {
         <div className="attachment-container">
             <div className="heading-btn">
                 <h2>Attachments</h2>
-                <button className="attach-btn" style={{ display: !ecom ? 'none' : 'block' }}> 
+                <button className="attach-btn" style={{ display: !ecom ? 'none' : 'block' }}>
                     <label htmlFor="file-input" className="custom-file-label">
                         Attach
                     </label>
@@ -81,17 +102,28 @@ function Attachment(props) {
                 />
             </div>
             <div className="attachment-list">
-            {complaint.Attachment.map((file, index) => (
+                {complaint.Attachment.map((file, index) => (
                     <div key={index} className="attachment-item">
                         <div className="list-icons">
                             <span className="file-icon">{getFileIcon(file.name)}</span>
                             {/* Wrap the file name in an anchor tag */}
-                            <a href={URL.createObjectURL(file)} target="_blank" rel="noopener noreferrer">
+                            {/* <a href={URL.createObjectURL(file)} target="_blank" rel="noopener noreferrer">
                                 {file.name}
+                            </a> */}
+                            <a
+                                href={
+                                    file instanceof File
+                                        ? URL.createObjectURL(file)
+                                        : URL.createObjectURL(new Blob([], { type: file.type }))
+                                }
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {file.name || file.fileName}
                             </a>
                         </div>
                         <MdDelete style={{ display: !ecom ? 'none' : 'block' }}
-                         onClick={() => handleDelete(file.name)} />
+                            onClick={() => handleDelete(file.name)} />
                     </div>
                 ))}
             </div>

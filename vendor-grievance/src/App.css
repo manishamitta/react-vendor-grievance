@@ -227,7 +227,7 @@ h2
   background-color: #094899;
   border-radius: 20px;
 }
-.attach-btn:hover,.cmt-btn button:hover
+.attach-btn:hover,.cmt-btn button:hover, .try-again:hover
 {
   background-color: rgba(17, 133, 154, 0.2);
   cursor: pointer;
@@ -405,7 +405,7 @@ h2
   justify-content: space-between;
   align-items: center;
 }
-.cmt-btn button
+.cmt-btn button ,.try-again
 {
   padding: 10px;
   margin: 5px;
@@ -416,4 +416,26 @@ h2
   display: inline-block;
   font-size: 16px;
   border: 4px;
+}
+.errorBox
+{
+  background-color: salmon;
+  min-height: 40vh;
+  display: flex;
+  max-width: 80wh;
+
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  max-width: 80vw;
+  margin: 40px auto;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  background-color: whitesmoke;
+  backdrop-filter: blur(40px);
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(39, 7, 219, 0.532);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
 }

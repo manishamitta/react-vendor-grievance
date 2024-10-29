@@ -14,7 +14,7 @@ function ComplaintTable({ data, openModal }) {
 
 
     const onRowClick = (rowData) => {
-        console.log('Row clicked:', rowData);
+     
         singleComplain(rowData.complainno);
         openModal();
         
