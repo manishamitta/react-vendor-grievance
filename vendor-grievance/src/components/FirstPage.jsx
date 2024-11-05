@@ -21,8 +21,8 @@ function FirstPage() {
     const handleComplete = () => {
         // alert("Form completed!"); // Show alert message
        console.log(complaint);
-       return;
-        // handleCompSumbit(complaint);
+    //    return;
+        handleCompSumbit(complaint);
         // window.location.reload(); // Reload the page
     };
 

@@ -139,20 +139,20 @@ const ComplaintState = (props) => {
             const complainno = generateUniqueComplaintNumber(); // Call the function to get the complaint number
             for (let i = 0; i < data.Attachment.length; i++) {
                 let file = data.Attachment[i];
+                let content = file.content;
+                const base64Data = content.split(',')[1];
 
                 // Adjusting media type based on file extension
                 let mediaType;
                 if (file.type === "image/png" || file.type === "image/jpeg" || file.type === "image/jpg") {
                     mediaType = "image/png"; // Adjust this according to the file type
-                } else {
-                    continue; // Skip unsupported file types
-                }
-
-                await genAttachment(complainno, file.size, file.name, mediaType, null); // Pass mediaType here
+                } 
+                debugger;
+                await genAttachment(complainno, file.size, file.name, mediaType, base64Data); // Pass mediaType here
             }
 
-            await raiseComp(complainno, data.pono, data.vendor, data.CompType, data.Description);
-            console.log(`Complaint generated with No ${complainno}`);
+            // await raiseComp(complainno, data.pono, data.vendor, data.CompType, data.Description);
+             console.log(`Complaint generated with No ${complainno}`);
         } catch (error) {
             console.error("Error in handleCompSubmit:", error); // More descriptive error logging
         }
@@ -169,7 +169,7 @@ const ComplaintState = (props) => {
                 body: JSON.stringify({
                     complainno: complainno,
                     cpono: cpono,
-                    cpannum: cpannum,
+                    cvencode: cpannum,
                     cstatus: "Submitted",
                     ccomplain_about: ccomplain_about,
                     cdesc: cdesc
@@ -199,6 +199,8 @@ const ComplaintState = (props) => {
                     complaintno: complaintno
                 })
             });
+            console.log("Attahment Post success");
+            console.log(response);
 
             const responseBody = await response.json(); // Get the response body
             const attachmentId = responseBody.ID; // Assuming your response returns an ID
@@ -210,9 +212,6 @@ const ComplaintState = (props) => {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    content: content,
-                    mediaType: mediaType,
-                    fileName: fileName,
                     size: size,
                     complaintno: complaintno,
                     url: `/odata/v4/my/files(${attachmentId})/content`
