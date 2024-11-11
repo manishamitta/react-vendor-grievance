@@ -20,7 +20,7 @@ function Comments({ commentsData }) {
     if (loading) {
         return (
             <div className="comments-container">
-                <Loading /> {/* Show the loading component */}
+                <Loading minh="30vh"/> {/* Show the loading component */}
             </div>
         );
     }

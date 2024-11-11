@@ -38,7 +38,7 @@ const ComplaintState = (props) => {
             }
 
             const json = await response.json();
-            
+            console.log(json);
             setTemp(json.value);
             // Filter and map only the required fields
             const filteredComplaints = json.value.map(({ complainno, cpannum, cpono, ccomplain_about, cvencode, cstatus }) => ({

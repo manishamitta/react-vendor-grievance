@@ -7,6 +7,7 @@ import Complaint from './Complaint';
 import { FaUser, FaExclamationCircle, FaEye } from 'react-icons/fa';
 import SelectedPoContext from '../context/Selectedpo/SelectedPoContext';
 import ComplaintContext from '../context/Complaint/ComplaintContext';
+import Alerts from './Alert';
 
 function FirstPage() {
 
@@ -14,22 +15,36 @@ function FirstPage() {
     const [currentStep, setCurrentStep] = useState(0);
     const pocontext = useContext(SelectedPoContext);
     const { selectedRow, poData } = pocontext;
-
+    const[alert,setAlert] = useState(null);
     const compContext = useContext(ComplaintContext);
     const { complaint, handleCompSumbit } = compContext;
     const [wpo, setWpo] = useState(false);
 
+    const showAlert = (type,message)=>
+        {
+            setAlert({
+                type : type,
+                message : message
+            });
 
+            setTimeout(() => {
+                setAlert(null);
+            }, 2000);
+    }
     const handleComplete = () => {
         // alert("Form completed!"); // Show alert message
         console.log(complaint);
+        showAlert("success" , "Your complaint is submitted!")
+        window.scroll(0,0);
         //    return;
-        handleCompSumbit(complaint);
-        // window.location.reload(); // Reload the page
+        // handleCompSumbit(complaint);
+       setTimeout(() => {
+        window.location.reload(); // Reload the page
+       }, 2000);
     };
 
     const checkValidateTab = () => {
-        debugger
+   
        if(selectedRow != null || wpo === true){
         return true;
         } 
@@ -45,6 +60,12 @@ function FirstPage() {
     const errorMessages = () => {
         // you can add alert or console.log or any thing you want
         // alert("Please Select The Row");
+        showAlert("error","Please select a row");
+    };
+    const errorMessages2 = () => {
+        // you can add alert or console.log or any thing you want
+        // alert("Please Select The Row");
+        showAlert("error","Please fill the required details");
     };
 
     const tabChanged = ({ prevIndex, nextIndex }) => {
@@ -60,6 +81,7 @@ function FirstPage() {
      const goToSecondStep = () => {
         debugger
         setWpo(true); 
+
         if (nextRef.current) nextRef.current(); // Call the `handleNext` function if set
     };
 
@@ -68,7 +90,8 @@ function FirstPage() {
         nextRef.current = null;
     }, []);
     return (
-        <>
+        <>  
+            <Alerts alert = {alert}/>
             <div className="form-wizard-container">
                 <FormWizard
                     stepSize="xs"
@@ -123,7 +146,9 @@ function FirstPage() {
                         title="Preview"
                         icon={<FaEye />}
                         showErrorOnTab={false} // No need for error on the last step
-                        isValid={checkValidateTab2()} // Enable this tab only if Complaint details are valid
+                        isValid={checkValidateTab2()}
+                        validationError={errorMessages2}
+                         // Enable this tab only if Complaint details are valid
                     >
                         <Preview />
                     </FormWizard.TabContent>

@@ -100,7 +100,7 @@ function PoDetails() {
                         </div>
                     </div>
                 ) :
-                    <Loading />}
+                    <Loading minh="80vh" />}
             </>
         </div>
     )

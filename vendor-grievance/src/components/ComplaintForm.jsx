@@ -2,8 +2,8 @@ import React, { useContext } from 'react';
 import SelectedPoContext from '../context/Selectedpo/SelectedPoContext';
 
 function ComplaintForm(props) {
-    const { complaint, setComplaint, ecom ,heading ,cappnum} = props;
-    const { pono, vendor, CompType, Description } = complaint;
+    const { complaint, setComplaint, ecom ,heading , cpannum} = props;
+    const { pono, vendor, CompType, Description , cvencode } = complaint;
 
     const onChange = (e) => {
         setComplaint({
@@ -19,7 +19,7 @@ function ComplaintForm(props) {
                 <div className="disabled-input">
                     <div className="input">
                         <label htmlFor="vend_id">Vendor Code:</label>
-                        <input type="text" id='vend_id' name='vendor' value={vendor || '' ||cappnum} disabled />
+                        <input type="text" id='vend_id' name='vendor' value={'AN11180859274-T'} disabled />
                     </div>
                     <div className="input">
                         <label htmlFor="poNumber">Po Number:</label>

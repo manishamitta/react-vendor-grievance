@@ -21,7 +21,7 @@ function ComplaintDetails({ onClose }) {
 
   // Show Loading component while revComp is null
   if (!revComp) {
-    return <Loading  />;
+    return <Loading minh="80vh" />;
   }
 
   return (
