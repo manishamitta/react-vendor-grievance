@@ -8,18 +8,21 @@ import imageIcon from './images/image.png'; // Replace with the correct path
 import textIcon from './images/text.png'; // Replace with the correct path
 import zipIcon from './images/zip.png'; // Replace with the correct path
 import attach from './images/attachment.png';
-// import ComplaintContext from '../context/Complaint/ComplaintContext';
+
 function Attachment(props) {
-    // const [attachments, setAttachments] = useState([]);
     const fileInputRef = useRef(null);
-    // const compContext = useContext(ComplaintContext);
     const { complaint, setComplaint, ecom } = props;
-    // Handle file selection
-    // Helper to read file content as Base64
+
+    // Helper to read file content as Base64 and create Blob URL
     const readFileContent = (file) => {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);  // Resolve the file content as base64
+            reader.onload = () => {
+                const base64Content = reader.result; // Get the base64 content
+                const blob = new Blob([new Uint8Array(base64Content)], { type: file.type });
+                const url = URL.createObjectURL(blob); // Create a Blob URL
+                resolve({ base64Content, url });  // Resolve with base64 and URL
+            };
             reader.onerror = reject;
             reader.readAsDataURL(file);  // Read file as base64 URL
         });
@@ -31,12 +34,16 @@ function Attachment(props) {
 
         // Process each file and read its content
         const filesWithContent = await Promise.all(
-            selectedFiles.map(async (file) => ({
-                name: file.name,
-                size: file.size,
-                type: file.type,
-                content: await readFileContent(file)  // Get file content in base64
-            }))
+            selectedFiles.map(async (file) => {
+                const { base64Content, url } = await readFileContent(file); // Get both base64 content and URL
+                return {
+                    name: file.name,
+                    size: file.size,
+                    type: file.type,
+                    content: base64Content, // Store base64 content
+                    url: url // Store the Blob URL
+                };
+            })
         );
 
         // Update the complaint object with the new attachments
@@ -47,7 +54,6 @@ function Attachment(props) {
 
         fileInputRef.current.value = '';  // Reset the input after selection
     };
-
 
     // Handle file deletion
     const handleDelete = (fileName) => {
@@ -106,18 +112,22 @@ function Attachment(props) {
                     <div key={index} className="attachment-item">
                         <div className="list-icons">
                             <span className="file-icon">{getFileIcon(file.name)}</span>
-                            {/* Wrap the file name in an anchor tag */}
-                            {/* <a href={URL.createObjectURL(file)} target="_blank" rel="noopener noreferrer">
-                                {file.name}
-                            </a> */}
                             <a
-                                href={
-                                    file instanceof File
-                                        ? URL.createObjectURL(file)
-                                        : URL.createObjectURL(new Blob([], { type: file.type }))
-                                }
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                href="#"
+                                onClick={(e) => {
+                                    e.preventDefault(); // Prevent default link action
+                                    const base64Data = file.content.split(',')[1]; // Extract only the base64 data
+                                    const byteCharacters = atob(base64Data); // Decode base64
+
+                                    // Convert to Uint8Array
+                                    const byteNumbers = Array.from(byteCharacters).map(char => char.charCodeAt(0));
+                                    const byteArray = new Uint8Array(byteNumbers);
+
+                                    // Create Blob and open in new tab
+                                    const blob = new Blob([byteArray], { type: file.type });
+                                    const url = URL.createObjectURL(blob);
+                                    window.open(url, '_blank');
+                                }}
                             >
                                 {file.name || file.fileName}
                             </a>

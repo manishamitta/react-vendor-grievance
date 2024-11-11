@@ -129,7 +129,7 @@ const ComplaintState = (props) => {
         const formattedDate = now.toISOString().replace(/[-T:Z]/g, '').slice(0, 14); // Get 'YYYYMMDDHHMMSS'
 
         // Ensure the number part is 8 to 10 digits long
-        const complaintNumber = `COMPNO${formattedDate.slice(-8)}`; // Take the last 8 digits of the formatted date/time
+        const complaintNumber = formattedDate.slice(-8); // Take the last 8 digits of the formatted date/time
 
         return complaintNumber;
     }
