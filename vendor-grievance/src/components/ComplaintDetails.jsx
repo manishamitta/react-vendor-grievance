@@ -41,8 +41,8 @@ function ComplaintDetails({ onClose }) {
       <div className='step2-container'>
         <Attachment complaint={revComp} setComplaint={setrevComp} ecom={false} />
       </div>
-      <div className="bck-btn">
-        <button onClick={onClose} style={backButtonStyle}>
+      <div >
+        <button onClick={onClose} className="bck-btn">
           Back
         </button>
       </div>

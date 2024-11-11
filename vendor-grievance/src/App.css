@@ -6,10 +6,10 @@
   font-style: normal;
 }
 
-h2
-{
+h2 {
   font-weight: 700;
 }
+
 .form-wizard-container {
   padding: 20px;
   max-width: 100%;
@@ -48,6 +48,9 @@ h2
   background-color: #008CBA;
 } */
 
+/* .parent{
+  perspective: 1000px; 
+} */
 .step2-container {
   max-width: 80vw;
   margin: 40px auto;
@@ -61,12 +64,11 @@ h2
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   transform-style: preserve-3d;
 }
-/* .parent{
-  perspective: 1000px; 
-} */
+
+
 .step2-container:hover {
-  transform: translateZ(20px); 
-  box-shadow: 0 0 20px rgba(39, 7, 219, 0.532); 
+  transform: translateZ(20px);
+  box-shadow: 0 0 20px rgba(39, 7, 219, 0.532);
 }
 
 
@@ -146,6 +148,7 @@ h2
   border-radius: 4px;
   outline: none;
   box-shadow: none;
+  font-size: 14px;
 }
 
 .input select {
@@ -183,7 +186,44 @@ h2
 
 /*  */
 
-
+/* with out po button */
+.wpo {
+  width: 80vw;
+  height: 20px;
+  /* background-color: salmon; */
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding-right: 15px;
+}
+.wpobtn{
+  background-color: blue;
+  border: none;
+  color: white;
+  padding: 11px 28px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  /* margin-right: 10px; */
+  /* margin-left: 10px; */
+  border-radius: 45px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+.wpobtn:hover {
+  background-color: navy;
+  }
+  
+  .wpobtn:focus {
+  outline: none;
+  }
+  
+  .wpobtn:active {
+  transform: translateY(2px);
+  }
 /* Complaints Attachments section*/
 .attachment-container {
   background-color: white;
@@ -223,12 +263,14 @@ h2
   font-size: 16px;
   border: 4px;
   margin-right: 10px;
-  
+
   background-color: #094899;
   border-radius: 20px;
 }
-.attach-btn:hover,.cmt-btn button:hover, .try-again:hover
-{
+
+.attach-btn:hover,
+.cmt-btn button:hover,
+.try-again:hover {
   background-color: rgba(17, 133, 154, 0.2);
   cursor: pointer;
 }
@@ -311,17 +353,21 @@ h2
   /* Optional padding for table cells */
   border-bottom: 1px solid #ddd;
   text-align: left;
+  font-size: 14px;
 }
 
 .p-datatable-thead>tr>th {
   padding: 8px;
   background-color: #f4f4f4;
   text-align: center !important;
+  font-size: 16px;
 
 }
+
 .highlight-row:hover {
   background-color: #f5f5f5 !important;
-  box-shadow: inset 0 0 0 2px #838080 !important; /* Ensure the style is applied with !important */
+  box-shadow: inset 0 0 0 2px #838080 !important;
+  /* Ensure the style is applied with !important */
   cursor: pointer;
 }
 
@@ -339,14 +385,37 @@ h2
 }
 
 /* Complaint details */
+/*back button */
 .bck-btn {
-  max-width: 80vw;
-  padding: 10px;
-  margin: 20px auto;
-  display: flex;
-  justify-content: end;
+  background-color: blue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-left: 10px;
+  border-radius: 50px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+  float: right;
 
 }
+.bck-btn:hover {
+  background-color: navy;
+  }
+  
+  .bck-btn:focus {
+  outline: none;
+  }
+  
+  .bck-btn:active {
+  transform: translateY(2px);
+  }
+  
 
 /* Modal CSS */
 .modal-overlay {
@@ -360,7 +429,8 @@ h2
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Dark background */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -370,8 +440,8 @@ h2
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
- 
-  min-width:100%;
+
+  min-width: 100%;
   margin: auto;
   position: relative;
 }
@@ -385,8 +455,8 @@ h2
   font-size: 1.5rem;
   cursor: pointer;
 }
-.comments-container
-{
+
+.comments-container {
   text-align: start;
   background-color: white;
   min-height: 40vh;
@@ -399,14 +469,15 @@ h2
   display: flex;
   flex-direction: column;
 }
-.cmtheadingbtn
-{
+
+.cmtheadingbtn {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.cmt-btn button ,.try-again
-{
+
+.cmt-btn button,
+.try-again {
   padding: 10px;
   margin: 5px;
   background-color: #094899;
@@ -417,8 +488,8 @@ h2
   font-size: 16px;
   border: 4px;
 }
-.errorBox
-{
+
+.errorBox {
   background-color: salmon;
   min-height: 40vh;
   display: flex;
@@ -438,4 +509,13 @@ h2
   box-shadow: 0 0 10px rgba(39, 7, 219, 0.532);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   transform-style: preserve-3d;
+}
+/* Styles for required field asterisk */
+.required::after {
+  content: " *";
+  color: rgba(205, 27, 27, 0.877);
+  font-weight: bold;
+  /* margin-left: 4px; */
+  top: 2px;
+  position: relative;
 }

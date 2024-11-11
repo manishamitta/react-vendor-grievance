@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import FormWizard from "react-form-wizard-component";
 import "react-form-wizard-component/dist/style.css";
 import PoDetails from './PoDetails';
@@ -10,24 +10,32 @@ import ComplaintContext from '../context/Complaint/ComplaintContext';
 
 function FirstPage() {
 
-
+    const nextRef = useRef(null)
     const [currentStep, setCurrentStep] = useState(0);
     const pocontext = useContext(SelectedPoContext);
     const { selectedRow, poData } = pocontext;
 
     const compContext = useContext(ComplaintContext);
-    const { complaint , handleCompSumbit} = compContext;
+    const { complaint, handleCompSumbit } = compContext;
+    const [wpo, setWpo] = useState(false);
+
 
     const handleComplete = () => {
         // alert("Form completed!"); // Show alert message
-       console.log(complaint);
-    //    return;
+        console.log(complaint);
+        //    return;
         handleCompSumbit(complaint);
         // window.location.reload(); // Reload the page
     };
 
     const checkValidateTab = () => {
-        return selectedRow !== null; // If selectedRow exists, it's valid
+        debugger
+       if(selectedRow != null || wpo === true){
+        return true;
+        } 
+        else{
+            return false;
+        }// If selectedRow exists, it's valid
     };
 
     const checkValidateTab2 = () => {
@@ -45,64 +53,83 @@ function FirstPage() {
         setCurrentStep(nextIndex);
         // window.scrollTo(0, 0);
     };
+    useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to the top when `currentStep` changes
+}, [currentStep]);
+     // Manually call the "Next" function stored in `nextRef` when button is clicked
+     const goToSecondStep = () => {
+        debugger
+        setWpo(true); 
+        if (nextRef.current) nextRef.current(); // Call the `handleNext` function if set
+    };
 
+    useEffect(() => {
+        // Clear `nextRef` after the component mounts to avoid stale closures
+        nextRef.current = null;
+    }, []);
     return (
-       <>
-        <div className="form-wizard-container">
-            <FormWizard
-                stepSize="sm"
-                onComplete={handleComplete}
-                onTabChange={tabChanged}
-                initialIndex={currentStep}
-                color="#094899"
-                backButtonTemplate={(handlePrevious) => (
-                    <button className="back-button" onClick={handlePrevious}>
-                        Back
-                    </button>
-                )}
-                nextButtonTemplate={(handleNext) => (
-                    <button className="next-button" onClick={handleNext}>
-                        Next
-                    </button>
-                )}
-                finishButtonTemplate={(handleComplete) => (
-                    <button className="finish-button" onClick={handleComplete}>
-                        Submit
-                    </button>
-                )}
-            >
-                <FormWizard.TabContent
-                    title="PO Details"
-                    icon={<FaUser />}
-                    showErrorOnTab={!checkValidateTab()} // Show error if PO Details are not valid
-                    showErrorOnTabColor="red"
-
+        <>
+            <div className="form-wizard-container">
+                <FormWizard
+                    stepSize="xs"
+                    onComplete={handleComplete}
+                    onTabChange={tabChanged}
+                    initialIndex={currentStep}
+                    color="#094899"
+                    backButtonTemplate={(handlePrevious) => (
+                        <button className="back-button" onClick={handlePrevious}>
+                            Back
+                        </button>
+                    )}
+                    nextButtonTemplate={(handleNext) => {
+                        nextRef.current = handleNext;
+                        return (
+                            <button className="next-button" onClick={handleNext}>
+                                Next
+                            </button>
+                        )
+                    }}
+                    finishButtonTemplate={(handleComplete) => (
+                        <button className="finish-button" onClick={handleComplete}>
+                            Submit
+                        </button>
+                    )}
                 >
-                    <PoDetails />
-                </FormWizard.TabContent>
+                    <FormWizard.TabContent
+                        title="PO Details"
+                        icon={<FaUser />}
+                        showErrorOnTab={!checkValidateTab()} // Show error if PO Details are not valid
+                        showErrorOnTabColor="red"
 
-                <FormWizard.TabContent
-                    title="Complaint"
-                    icon={<FaExclamationCircle />}
-                    showErrorOnTab={!checkValidateTab2()} // Show error if Complaint details are not valid
-                    showErrorOnTabColor="red"
-                    isValid={checkValidateTab()}
-                    validationError={errorMessages} // Enable this tab only if PO details are valid
-                >
-                    <Complaint />
-                </FormWizard.TabContent>
+                    >
+                        <div className="wpo">
+                            <button className='wpobtn' onClick={goToSecondStep}>Create</button>
+                        </div>
+                        <PoDetails />
+                    </FormWizard.TabContent>
 
-                <FormWizard.TabContent
-                    title="Preview"
-                    icon={<FaEye />}
-                    showErrorOnTab={false} // No need for error on the last step
-                    isValid={checkValidateTab2()} // Enable this tab only if Complaint details are valid
-                >
-                    <Preview />
-                </FormWizard.TabContent>
-            </FormWizard>
+                    <FormWizard.TabContent
+                        title="Complaint"
+                        icon={<FaExclamationCircle />}
+                        showErrorOnTab={!checkValidateTab2()} // Show error if Complaint details are not valid
+                        showErrorOnTabColor="red"
+                        isValid={checkValidateTab()}
+                        validationError={errorMessages} // Enable this tab only if PO details are valid
+                    >
+                        <Complaint />
+                    </FormWizard.TabContent>
 
-            <style>{`
+                    <FormWizard.TabContent
+                        title="Preview"
+                        icon={<FaEye />}
+                        showErrorOnTab={false} // No need for error on the last step
+                        isValid={checkValidateTab2()} // Enable this tab only if Complaint details are valid
+                    >
+                        <Preview />
+                    </FormWizard.TabContent>
+                </FormWizard>
+
+                <style>{`
                 @import url("https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css");
                 
                 .form-control {
@@ -215,10 +242,11 @@ function FirstPage() {
         .finish-button:active {
           transform: translateY(2px);
          }
-            `}</style>
-        </div>
-       </>
-    );
+            `}
+            </style>
+            </div>
+            </>
+    )
 }
 
 export default FirstPage;

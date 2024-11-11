@@ -27,7 +27,7 @@ function ComplaintForm(props) {
                     </div>
                 </div>
                 <div className="input">
-                    <label htmlFor="comptype">Complaint Type:</label>
+                    <label htmlFor="comptype" className='required' >Complaint Type:</label>
                     <select
                         id="comptype"
                         name="CompType"
@@ -46,7 +46,7 @@ function ComplaintForm(props) {
                 </div>
 
                 <div className="input">
-                    <label htmlFor="description">Complaint Description:</label>
+                    <label htmlFor="description" className='required'>Complaint Description:</label>
                     <textarea
                         id="description"
                         name="Description"
