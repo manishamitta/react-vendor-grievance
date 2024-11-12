@@ -15,10 +15,10 @@ function FirstPage() {
     const nextRef = useRef(null)
     const [currentStep, setCurrentStep] = useState(0);
     const pocontext = useContext(SelectedPoContext);
-    const { selectedRow, poData } = pocontext;
+    const { selectedRow, setSelectedRow } = pocontext;
     const [alert, setAlert] = useState(null);
     const compContext = useContext(ComplaintContext);
-    const { complaint, handleCompSumbit } = compContext;
+    const { complaint, handleCompSumbit , getCompalins ,setComplaint } = compContext;
     const [wpo, setWpo] = useState(false);
     const [loading, setLoading] = useState(false);
     const showAlert = (type, message) => {
@@ -94,10 +94,20 @@ function FirstPage() {
         window.scrollTo(0, 0); // Scroll to the top when `currentStep` changes
     }, [currentStep]);
     // Manually call the "Next" function stored in `nextRef` when button is clicked
-    const goToSecondStep = () => {
+    const goToSecondStep = async () => {
         debugger
         setWpo(true);
-
+        setSelectedRow({
+            amount: "",
+            pannum: "abc@example.com",
+            pono: "",
+            type: "",
+            vendor: "AN123456789-T"
+        });
+        setComplaint(prev => ({
+            ...prev , pono : null
+        }));
+       await getCompalins("null");
         if (nextRef.current) nextRef.current(); // Call the `handleNext` function if set
     };
 

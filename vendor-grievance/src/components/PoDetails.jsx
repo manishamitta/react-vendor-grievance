@@ -23,17 +23,17 @@ function PoDetails() {
     }, [])
 
 
-    const onRowSelect = (rowData) => {
+    const onRowSelect = async(rowData) => {
         setSelectedRow(rowData); // Update selected row
         const id = rowData.vendor;
         const po = rowData.pono;
-
+        console.log(rowData);
         setComplaint({
             ...complaint,
             vendor: id,
             pono: po
         });
-        getCompalins(po);
+        await getCompalins(po);
         // Log the selected row details
     };
 

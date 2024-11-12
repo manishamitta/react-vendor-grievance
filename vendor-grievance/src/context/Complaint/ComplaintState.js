@@ -26,8 +26,17 @@ const ComplaintState = (props) => {
     const [temp, setTemp] = useState(null);
     const [PoComp, setPoComp] = useState(null);
     const getCompalins = async (pono) => {
-        const url = `${URL}complains?$filter=cpono eq '${pono}'`;
+        let url;
 
+        if (pono === null || pono === "null") {
+            // If pono is null or the string "null", construct the URL without quotes around the value
+            url = `${URL}complains?$filter=cpono eq null`;
+        } else {
+            // Otherwise, assume pono is a valid string and construct the URL with quotes around the value
+            url = `${URL}complains?$filter=cpono eq '${pono}'`;
+        }
+
+        debugger
         try {
             const response = await fetch(url, {
                 method: "GET",
@@ -49,7 +58,7 @@ const ComplaintState = (props) => {
                 cvencode,
                 cstatus
             }));
-          
+
 
             // Set the filtered complaints in your state
             setPoComp(filteredComplaints);
@@ -69,7 +78,7 @@ const ComplaintState = (props) => {
         const attachmentResponse = await fetch(`${URL}files?$filter=complaintno eq '${id}'`, {
             method: "GET"
         });
-        
+
 
         if (!attachmentResponse.ok) {
             console.error("Failed to fetch attachments");
@@ -80,13 +89,13 @@ const ComplaintState = (props) => {
         const newAttch = attjson.value.map((file) => {
             const blob = new Blob([], { type: file.mediaType }); // Create an empty Blob of the correct type
             blob.name = file.fileName;                           // Add `name` property for compatibility
-        
+
             return {
                 name: file.fileName, // Match `name` expected by `Attachment`
                 size: file.size,
                 type: file.mediaType,
-                blob: blob ,
-                url : URL+file.url.slice(13)      // Store Blob instead of URL
+                blob: blob,
+                url: URL + file.url.slice(13)      // Store Blob instead of URL
             };
         });
         console.log(newAttch)
@@ -94,10 +103,10 @@ const ComplaintState = (props) => {
         const foundComplaint = temp.find(complaint => complaint.complainno === id);
 
         if (foundComplaint) {
-           
+
 
             // Filter out any null attachments that couldn't be fetched
-           
+
             setrevComp({
                 id: foundComplaint.complainno,
                 vendor: foundComplaint.cpannum,
@@ -147,17 +156,17 @@ const ComplaintState = (props) => {
                 let mediaType;
                 if (file.type === "image/png" || file.type === "image/jpeg" || file.type === "image/jpg") {
                     mediaType = "image/png"; // Adjust this according to the file type
-                } 
+                }
                 debugger;
                 await genAttachment(complainno, file.size, file.name, mediaType, base64Data); // Pass mediaType here
             }
 
             await raiseComp(complainno, data.pono, data.vendor, data.CompType, data.Description);
             //  console.log(`Complaint generated with No ${complainno}`);
-             return complainno;
+            return complainno;
         } catch (error) {
             console.error("Error in handleCompSubmit:", error); // More descriptive error logging
-            throw new Error("Error during complaint submission"); 
+            throw new Error("Error during complaint submission");
         }
     };
 
@@ -179,7 +188,7 @@ const ComplaintState = (props) => {
                 })
             });
             const json = await response.json();
-  
+
         } catch (error) {
             console.error("Error in raiseComp:", error); // More descriptive error logging
         }

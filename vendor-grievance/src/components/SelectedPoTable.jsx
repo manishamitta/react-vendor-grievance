@@ -8,12 +8,12 @@ function SelectedPoTable() {
 
     const { selectedRow } = pocontext;
 
-
+    
     return (
 
         <div className="ComplaintTable">
             <h2 style={{ textAlign: 'start' }}>Selected PO</h2>
-            <DataTable
+            {selectedRow.pono == '' ? <p style={{ textAlign: 'start' }}> <strong>Raising Complain without PO.</strong> </p>: (<DataTable
                 className='ComplaintTableContent'
                 scrollable // Enable scrolling
                 dataKey="pono" // Use a unique identifier for rows
@@ -23,7 +23,7 @@ function SelectedPoTable() {
                 <Column field='vendor' header="Vendor Id" />
                 <Column field='type' header="PO/Invoice" />
                 <Column field='amount' header="PO Amount" />
-            </DataTable>
+            </DataTable>)}
         </div>
 
     )

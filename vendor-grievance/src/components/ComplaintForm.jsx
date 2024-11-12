@@ -21,7 +21,7 @@ function ComplaintForm(props) {
                         <label htmlFor="vend_id">Vendor Code:</label>
                         <input type="text" id='vend_id' name='vendor' value={'AN11180859274-T'} disabled />
                     </div>
-                    <div className="input">
+                    <div className="input" style={{display : pono ?"block" : "none" }}>
                         <label htmlFor="poNumber">Po Number:</label>
                         <input type="text" id='poNumber' name='pono' value={pono || ''} disabled />
                     </div>
