@@ -65,7 +65,7 @@ h2 {
   backdrop-filter: blur(40px);
   padding: 10px;
   box-shadow: 0 0 10px rgba(39, 7, 219, 0.532);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease ,scale 0.3s ease;
   transform-style: preserve-3d;
 }
 
@@ -73,6 +73,8 @@ h2 {
 .step2-container:hover {
   transform: translateZ(20px);
   box-shadow: 0 0 20px rgba(39, 7, 219, 0.532);
+  
+ 
 }
 
 
@@ -439,11 +441,10 @@ h2 {
   align-items: center;
 }
 
-.modal-content {
+.modal-content-comp {
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
-
   min-width: 100%;
   margin: auto;
   position: relative;
@@ -531,4 +532,22 @@ h2 {
   top: 7.5rem;
   margin: 0 100px;
   z-index: 1;
+}
+.closeBtndiv
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-comment-content
+{
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  min-height: 70%;
+  min-width: 60%;
+  margin: auto;
+  position: relative;
+  overflow-y: scroll;
 }

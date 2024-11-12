@@ -11,7 +11,7 @@ const Modal = ({ show, onClose, children }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal-content">
+      <div className="modal-content-comp">
         
         {/* <button className="modal-close" onClick={onClose}>X</button> */}
         {children} {/* Inject custom content here */}

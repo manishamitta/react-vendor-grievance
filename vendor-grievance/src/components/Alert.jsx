@@ -10,7 +10,7 @@ export default function Alerts({ alert }) { // Destructure alert from props
     };
 
     return (
-        <div className="alertDiv">
+        <div className="alertDiv" style={{ display: alert && alert.type && alert.message ? 'block' : 'none' }}>
             {alert && alert.type && alert.message ? ( // Ensure alert has type and message
                 <Stack sx={{ width: '100%' }} spacing={2}>
                     <Alert severity={alert.type}>

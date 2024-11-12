@@ -85,7 +85,8 @@ const ComplaintState = (props) => {
                 name: file.fileName, // Match `name` expected by `Attachment`
                 size: file.size,
                 type: file.mediaType,
-                blob: blob           // Store Blob instead of URL
+                blob: blob ,
+                url : URL+file.url.slice(13)      // Store Blob instead of URL
             };
         });
         console.log(newAttch)
@@ -151,10 +152,12 @@ const ComplaintState = (props) => {
                 await genAttachment(complainno, file.size, file.name, mediaType, base64Data); // Pass mediaType here
             }
 
-            // await raiseComp(complainno, data.pono, data.vendor, data.CompType, data.Description);
-             console.log(`Complaint generated with No ${complainno}`);
+            await raiseComp(complainno, data.pono, data.vendor, data.CompType, data.Description);
+            //  console.log(`Complaint generated with No ${complainno}`);
+             return complainno;
         } catch (error) {
             console.error("Error in handleCompSubmit:", error); // More descriptive error logging
+            throw new Error("Error during complaint submission"); 
         }
     };
 

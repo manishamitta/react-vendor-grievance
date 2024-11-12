@@ -8,6 +8,7 @@ import { FaUser, FaExclamationCircle, FaEye } from 'react-icons/fa';
 import SelectedPoContext from '../context/Selectedpo/SelectedPoContext';
 import ComplaintContext from '../context/Complaint/ComplaintContext';
 import Alerts from './Alert';
+import Loading from './Loading';
 
 function FirstPage() {
 
@@ -15,40 +16,55 @@ function FirstPage() {
     const [currentStep, setCurrentStep] = useState(0);
     const pocontext = useContext(SelectedPoContext);
     const { selectedRow, poData } = pocontext;
-    const[alert,setAlert] = useState(null);
+    const [alert, setAlert] = useState(null);
     const compContext = useContext(ComplaintContext);
     const { complaint, handleCompSumbit } = compContext;
     const [wpo, setWpo] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const showAlert = (type, message) => {
+        setAlert({
+            type: type,
+            message: message
+        });
 
-    const showAlert = (type,message)=>
-        {
-            setAlert({
-                type : type,
-                message : message
-            });
+        setTimeout(() => {
+            setAlert(null);
+        }, 2000);
+    }
+
+    const handleComplete = async () => {
+        try {
+            setLoading(true); // Start the loading spinner
+
+            // Call handleCompSumbit, it returns the complaint number
+            const complainno = await handleCompSumbit(complaint);
+
+            // Once submission is done, show the success alert
+            showAlert("success", `Your complaint is submitted with complaint no: ${complainno}`);
+
+            // Scroll to the top of the page
+            window.scroll(0, 0);
 
             setTimeout(() => {
-                setAlert(null);
+                window.location.reload(); // Reload the page
             }, 2000);
-    }
-    const handleComplete = () => {
-        // alert("Form completed!"); // Show alert message
-        console.log(complaint);
-        showAlert("success" , "Your complaint is submitted!")
-        window.scroll(0,0);
-        //    return;
-        // handleCompSumbit(complaint);
-       setTimeout(() => {
-        window.location.reload(); // Reload the page
-       }, 2000);
+
+        } catch (error) {
+            console.error("Error during submission:", error);
+            showAlert("error", "Something went wrong, please try again.");
+        } finally {
+            setLoading(false); // Stop the loading spinner
+        }
     };
 
+
+
     const checkValidateTab = () => {
-   
-       if(selectedRow != null || wpo === true){
-        return true;
-        } 
-        else{
+
+        if (selectedRow != null || wpo === true) {
+            return true;
+        }
+        else {
             return false;
         }// If selectedRow exists, it's valid
     };
@@ -60,12 +76,12 @@ function FirstPage() {
     const errorMessages = () => {
         // you can add alert or console.log or any thing you want
         // alert("Please Select The Row");
-        showAlert("error","Please select a row");
+        showAlert("error", "Please select a row");
     };
     const errorMessages2 = () => {
         // you can add alert or console.log or any thing you want
         // alert("Please Select The Row");
-        showAlert("error","Please fill the required details");
+        showAlert("error", "Please fill the required details");
     };
 
     const tabChanged = ({ prevIndex, nextIndex }) => {
@@ -75,12 +91,12 @@ function FirstPage() {
         // window.scrollTo(0, 0);
     };
     useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to the top when `currentStep` changes
-}, [currentStep]);
-     // Manually call the "Next" function stored in `nextRef` when button is clicked
-     const goToSecondStep = () => {
+        window.scrollTo(0, 0); // Scroll to the top when `currentStep` changes
+    }, [currentStep]);
+    // Manually call the "Next" function stored in `nextRef` when button is clicked
+    const goToSecondStep = () => {
         debugger
-        setWpo(true); 
+        setWpo(true);
 
         if (nextRef.current) nextRef.current(); // Call the `handleNext` function if set
     };
@@ -90,8 +106,8 @@ function FirstPage() {
         nextRef.current = null;
     }, []);
     return (
-        <>  
-            <Alerts alert = {alert}/>
+        <>
+            <Alerts alert={alert} />
             <div className="form-wizard-container">
                 <FormWizard
                     stepSize="xs"
@@ -148,9 +164,9 @@ function FirstPage() {
                         showErrorOnTab={false} // No need for error on the last step
                         isValid={checkValidateTab2()}
                         validationError={errorMessages2}
-                         // Enable this tab only if Complaint details are valid
+                    // Enable this tab only if Complaint details are valid
                     >
-                        <Preview />
+                        {loading ? <Loading minh="80vh" /> : <Preview />}
                     </FormWizard.TabContent>
                 </FormWizard>
 
@@ -268,9 +284,9 @@ function FirstPage() {
           transform: translateY(2px);
          }
             `}
-            </style>
+                </style>
             </div>
-            </>
+        </>
     )
 }
 

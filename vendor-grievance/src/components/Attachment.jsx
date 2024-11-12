@@ -11,8 +11,7 @@ import attach from './images/attachment.png';
 
 function Attachment(props) {
     const fileInputRef = useRef(null);
-    const { complaint, setComplaint, ecom } = props;
-
+    const { complaint, setComplaint, ecom, rev = false } = props;
     // Helper to read file content as Base64 and create Blob URL
     const readFileContent = (file) => {
         return new Promise((resolve, reject) => {
@@ -67,7 +66,9 @@ function Attachment(props) {
 
     // Get file type icon based on file extension
     const getFileIcon = (fileName) => {
-        const extension = fileName.split('.').pop().toLowerCase();
+       
+        if(!fileName){return}
+        const extension = fileName.split('/').pop().toLowerCase();
         switch (extension) {
             case 'doc':
             case 'docx':
@@ -111,26 +112,32 @@ function Attachment(props) {
                 {complaint.Attachment.map((file, index) => (
                     <div key={index} className="attachment-item">
                         <div className="list-icons">
-                            <span className="file-icon">{getFileIcon(file.name)}</span>
+                            <span className="file-icon">{getFileIcon(file.type)}</span>
                             <a
-                                href="#"
+                                href={rev ? file.url : '#'}  // If rev is true, set href to file.url, otherwise '#' (dummy link)
+                                target="_blank"  // Always open the link in a new tab
                                 onClick={(e) => {
-                                    e.preventDefault(); // Prevent default link action
-                                    const base64Data = file.content.split(',')[1]; // Extract only the base64 data
-                                    const byteCharacters = atob(base64Data); // Decode base64
+                                    if (!rev) {
+                                        e.preventDefault(); // Prevent the default action only when rev is false
 
-                                    // Convert to Uint8Array
-                                    const byteNumbers = Array.from(byteCharacters).map(char => char.charCodeAt(0));
-                                    const byteArray = new Uint8Array(byteNumbers);
+                                        const base64Data = file.content.split(',')[1]; // Extract only the base64 data
+                                        const byteCharacters = atob(base64Data); // Decode base64
 
-                                    // Create Blob and open in new tab
-                                    const blob = new Blob([byteArray], { type: file.type });
-                                    const url = URL.createObjectURL(blob);
-                                    window.open(url, '_blank');
+                                        // Convert to Uint8Array
+                                        const byteNumbers = Array.from(byteCharacters).map(char => char.charCodeAt(0));
+                                        const byteArray = new Uint8Array(byteNumbers);
+
+                                        // Create Blob and open in new tab
+                                        const blob = new Blob([byteArray], { type: file.type });
+                                        const url = URL.createObjectURL(blob);
+                                        window.open(url, '_blank');  // Open the base64 content in a new tab
+                                    }
                                 }}
                             >
                                 {file.name || file.fileName}
                             </a>
+
+
                         </div>
                         <MdDelete style={{ display: !ecom ? 'none' : 'block' }}
                             onClick={() => handleDelete(file.name)} />
